@@ -1,0 +1,239 @@
+//: Playground - noun: a place where people can play
+
+// *********KEYBOARD SHORTCUTS ******************
+//Show/hide completions: ⎋ (Escape) OR ⌃Space (Control + Space)
+// show navigator - cmd + O
+// Show/Hide Utilities: ⌥⌘0 (Option + Command + 0)
+// search for text entire project shit + command + F
+//Show/Hide Debug Area: ⇧⌘Y (Shift + Command + Y
+
+
+
+
+// ****************** VARIABLES,TYPES AND DECLARATIONS ******************
+
+
+var name = "Zubin"
+
+var number  = "45"
+let integer = Int(number)! // value of integer can never be changed
+print(number + " days to go!")
+
+print(integer + 5)
+print (integer / 7)
+
+
+// 	what happens when you want use variables that are not initialised? This is called optionals. 
+// and you get an ERROR unless
+
+var myMame: String    //>>>> variable called name has no value
+print (myName)        ///>>> gives horrible error that you're using myName before it is initialised
+
+var myName: String?   // add the ? so xCode will let you us a variable with 'nil' value
+
+print(myName)  			// >>  this will print 'nil' to the console
+
+//best way to get around the issue of a non-value being passed in etc is to wrap the logic in an if statement
+// such that only if the if statement evaluates correctly will the logic run
+//and this will avoid a fatal error (crash)
+
+// FOR EXAMPLE
+var aNum = "4"        // run this in playground, and change 4 to zubin. the math operation wont work => error
+var asInt = Int(aNum)
+
+if let inputNum = asInt {
+	print(inputNum + 10)
+} else {
+	print ("you've not input a valid value for aNum")
+}
+
+
+
+// how to include other variables (including non string types) in a string
+// print(" insert string \(non string OR String variable)")   - see line 33
+print("I will be \(integer) years old in \(integer - 36) years")
+
+// emtpy variables must have a type declaration (esp if they're not initially assigned a value)
+var anInteger: Int
+var aFloat: Float
+var aDouble: Double
+var aBoolean: Bool
+
+c = 22.0992
+
+let float1 = 5.76
+let int1 = 8
+print("The product of 5.76 and 8 is \(float1 * Double(int1))")
+//OR
+print("The product of \(float1) and \(int1) is \(float1 * Double(int1))")
+
+
+
+
+// ****************** ARRAYS ******************
+
+var array = [3.87, 7.1, 8.9]
+let rem = array.index(of: 7.1)
+let prod = array[0]*array[2]
+array.remove(at: rem!)
+array.append(prod)
+
+// avoid array of mixed types
+// so to create an empty array of a specified type
+var stringArray = [String]()
+var intArray = [Int]()
+
+
+//****************** DICTIONARY ******************
+
+var dict = ["name": "Zubin", "name2": "Rowena"]
+print (dict["name2"]!)
+
+dict["name3"] = "Maggie"
+print (dict)
+dict.count
+
+if (dict.isEmpty == false) {
+	print ("The dictionary is as follows: " + dict.description)
+} else {
+	print ("the dictionary called \(dict) is empty.")
+}
+
+//to create an empty dictionary, similar to empty array
+var emptyDict = [String: String]()  // or [String: Bool]() or whatever value data type is needed
+
+// generate a random number
+var x = arc4random_uniform(6)
+
+
+
+****************** LOOPS ******************
+
+in new swift For loops are exclusively for arrays and are better suited than while loops
+
+var arr = [2,54,82,3,5,20,245, 345, 123]
+i = 0
+while i < arr.count {
+	arr[i] = arr[i] + 1
+i += 1
+}
+
+print (arr)
+
+var arr = [2,54,82,3,5,20,245, 345, 123]
+
+for int in arr {
+	// int = int +1   this canNOT be done because the variable assigned in for loops are CONSTANTS
+	print (int)
+}
+
+
+// change each element in the array, while using a FOR loop
+// HINT:  use the .enumerated() method on the array to return index # + element value
+//changing the contents of an array using a FOR loop
+
+var intArray = [1,2,3,4,5]
+
+intArray.enumerated()
+for (index, value) in intArray.enumerated() {
+	intArray[index] = value + 1
+}
+
+print(intArray)
+
+var names = ["Row", "Zubin", "Maggie", "Anita"]
+
+for (index, name) in names.enumerated() {
+	names[index] = "huh " + name + "!"
+}
+
+print (names)
+
+// create an array with 8, 7, 19 and 28 and half each of the values using a for loop
+
+var array = [8, 7, 19, 28]
+for (index, num) in array.enumerated() {
+	array[index] = num/2
+}
+
+print (array)
+
+
+****************** CLASSES & METHODS******************
+
+//convention - class names have the first letter capitalised
+
+// if you need to specify the return type of a method then the syntax is
+
+ //func methodName () -> returnDataType {
+	// ....  function body
+ //}
+
+
+
+
+
+class Ghost {
+	var isAlive = true
+	let maxStrength = 20
+	var strengthScore = 20
+	
+	func testIfAlive() -> Bool {
+		if (isAlive) {
+			print ("alive")
+		} else {
+			print ("Dead")
+		}
+		return isAlive    //return statements needed for non-void methods that 		  return a data type
+	}
+	
+	func getStrength() {
+		print (strengthScore)
+		//return
+	}
+	
+	func setLife (status: String) {
+		if (status == "dead") {
+			isAlive = false
+		} else if (status == "alive") {
+			isAlive = true
+		} else {
+		print ("life status has not changed.")
+		}
+	}
+}
+
+
+// initialise an object of Ghost called ghost
+var ghost = Ghost()
+
+// run method to retrieve life status
+ghost.testIfAlive()
+
+// return the value of the attribute (instance variable) isAlive
+ghost.isAlive
+//return the value of the attribute (instance variable)  strengthScore
+ghost.strengthScore
+
+
+//run the set life method to change the value of isAlive
+ghost.setLife(status: "dead")
+ghost.isAlive
+
+
+
+****************** STORING PERSISTENT DATA ******************
+
+setting user data is done in k/v pairs.  for example
+insert
+UserDefaults.standard().set("Zubin", forKey: "Name")    >>> put this in the func viewDidLoad() { }
+<<<
+REFERENCE: https://developer.apple.com/documentation/foundation/userdefaults
+>>>
+to retrieve the value stored ----
+let userName = UserDefaults.standard().object(forKey: "name")     
+<<<
+REFERENCE : https://developer.apple.com/documentation/foundation/userdefaults/1410095-object
+>>>
+
+
